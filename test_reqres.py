@@ -1,6 +1,10 @@
+import allure
 import requests
 import json
 import jsonschema
+from allure_commons._allure import step
+from allure_commons.types import AttachmentType
+
 url = "https://reqres.in/api/users"
 
 payload = json.dumps({
@@ -25,16 +29,21 @@ def test():
     jsonschema.validate(body, schema=json.loads(file.read()))
 
 
+def reqres_api_get(url):
+    requests.get()
+
+
 
 def test_job_name_returns_in_response():
   job = "leader"
   name = "morpheus"
-  response = requests.request("POST", url, headers=headers, data=payload)
-  body = response.json()
-  assert body["name"] == name
-  assert body["job"] == job
-  print(body)
-  print(response.json())
+  with step("API Request"):
+    response = requests.request("POST", url, headers=headers, data=payload)
+    body = response.json()
+    allure.attach(body=json.dumps(response.json(), indent=4, ensure_ascii=True), name="Response", attachment_type=AttachmentType.JSON, extension="json")
+    assert body["name"] == name
+    assert body["job"] == job
+
 
 def test_single_user():
   url = "https://reqres.in/api/users"

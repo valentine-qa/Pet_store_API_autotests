@@ -1,7 +1,9 @@
 from time import sleep
 
+import allure
 import requests
 from allure_commons._allure import step
+from allure_commons.types import AttachmentType
 from selene import browser, have
 
 LOGIN = "example1200@example.com"
@@ -29,7 +31,8 @@ def test_login_with_API():
             url='https://demowebshop.tricentis.com/login',
             data={"Email": LOGIN, "Password": PASSWORD, "RememberMe": False},
             allow_redirects=False)
-
+    allure.attach(body=request.text, name="Response", attachment_type=AttachmentType.TEXT, extension="txt")
+    allure.attach(body=str(request.cookies), name="Cookies", attachment_type=AttachmentType.TEXT, extension="txt")
     print(request.cookies)
     print(request.status_code)
     with step("Get cookie from API"):
