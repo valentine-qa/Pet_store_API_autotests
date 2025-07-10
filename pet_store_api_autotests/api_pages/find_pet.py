@@ -15,3 +15,19 @@ def find_pet_by_id(url, pet):
         response = get_request(url, headers)
 
     return response
+
+def find_pet_by_status(url, status):
+    endpoint = f'/v2/pet/findByStatus'
+    payload = {}
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    params = {
+        'status' : f'{status}'
+    }
+    url = url + endpoint
+
+    with allure.step("Get pet by ID"):
+        response = get_request(url, headers, params)
+
+    return response
