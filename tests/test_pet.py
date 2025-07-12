@@ -2,6 +2,7 @@ import json
 from enum import unique
 
 import allure
+import pytest
 import requests
 from allure_commons.types import Severity
 
@@ -84,6 +85,13 @@ class TestPet:
             assert response.status_code == 200
         with allure.step("Check that pet with ID was deleted"):
             assert response.json()["message"] == str(new_pet.json()["id"])
+
+    def test_fail(self):
+        return False
+
+    @pytest.mark.skip()
+    def test_skip(self):
+        pass
 
 
 
