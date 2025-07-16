@@ -6,11 +6,10 @@
 
 ---
 ### Check list of autotests
-1. Создание одного питомца.
-2. Поиск питомца по ID.
-3. Поиск несуществующего питомца.
-4. Поиск всех питомцев по указанному статусу.
-5. Удаление питомца.
+1. Creating a new pet.
+2. Finding a pet by ID.
+3. Finding a pet by status.
+4. Deleting a pet.
 
 ---
 
